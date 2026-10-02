@@ -1,9 +1,12 @@
-import streamlit as st
-import sqlite3
+import sys
 import os
+import sqlite3
 import json
 import pandas as pd
 from datetime import datetime, timezone
+
+# Ensure parent directory (assignment_2 root) is in python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Database path resolution
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "database", "db.sqlite")
@@ -132,7 +135,7 @@ if page == "📊 Intelligence Dashboard":
     with col_chart2:
         st.subheader("Verification Status Breakdown")
         status_df = pd.read_sql_query("SELECT status as Status, count(*) as Count FROM scholarships GROUP BY status", conn)
-        st.pie_chart(status_df.set_index("Status"))
+        st.bar_chart(status_df.set_index("Status"))
 
     st.markdown("### 🏆 Top Verified Scholarships (High Confidence)")
     top_df = pd.read_sql_query("""
