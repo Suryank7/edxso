@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Next.js Frontend Dashboard
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: edxso_web_ui
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_GATEWAY_URL=http://localhost:5000
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
+  # Node.js Express API Gateway & Orchestrator
+  api-gateway:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: edxso_api_gateway
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - AI_SERVICE_URL=http://ai-service:8000
+      - DRY_RUN=true
+      - JWT_SECRET=super-secret-jwt-key-edxso-2026-production
+    depends_on:
+      - ai-service
+    restart: unless-stopped
+
+  # Python FastAPI AI Personalization & Evaluation Service
+  ai-service:
+    build:
+      context: ./apps/ai-service
+      dockerfile: Dockerfile
+    container_name: edxso_ai_service
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
+
+  # Redis for Caching and Rate Limiting
+  redis:
+    image: redis:7-alpine
+    container_name: edxso_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: edxso_network

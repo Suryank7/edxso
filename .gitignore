@@ -1,0 +1,38 @@
+# EDXSO Influencer Outreach AI (InfluenceFlow AI)
+
+# Dependencies & Build Outputs
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+build/
+.turbo/
+coverage/
+
+# Python & AI Service
+*.pyc
+__pycache__/
+**/__pycache__/
+.venv/
+venv/
+.pytest_cache/
+**/.pytest_cache/
+
+# Environment Files & Secrets
+.env
+*.env
+!.env.example
+
+# OS / IDE Generated
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Assignment PDF/Doc Files to Exclude
+AI_Engineer_Intern_Assignment_1*.pdf
+AI_Engineer_Intern_Assignment_1*.docx
+*.pdf
+*.docx

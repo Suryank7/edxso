@@ -1,0 +1,18 @@
+[
+  {
+    "outreach_id": "out_6adad8e0",
+    "campaign_id": "camp_default_001",
+    "creator_id": "cr_001",
+    "creator_name": "Rohan Sharma",
+    "recipient": "contact.rohansharma@gmail.com",
+    "channel": "Email",
+    "subject": "Collab Test",
+    "message_body": "Test Message Body",
+    "status": "SIMULATED",
+    "sent_at": "2026-10-02T07:07:18.105Z",
+    "error": null,
+    "retry_count": 0,
+    "is_dry_run": true,
+    "notes": "Dry-run active: Email dispatch simulated safely without real SMTP transmission."
+  }
+]
